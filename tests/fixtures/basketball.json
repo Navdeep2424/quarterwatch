@@ -1,0 +1,8 @@
+{
+  "success": 1,
+  "results": [[
+    {"type": "EV", "CP": "Q1", "TM": "6", "TS": "46", "SS": "4-5"},
+    {"type": "MA", "NA": "Total 2-Way", "SU": "0"},
+    {"type": "PA", "NA": "Under", "HA": "158.5", "OD": "5/6", "SU": "0"}
+  ]]
+}

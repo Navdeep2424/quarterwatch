@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="QuarterWatch monitors live sports feeds, captures time-sensitive signals, and tracks paper-trial outcomes within an API budget.">
+  <title>QuarterWatch · Live operations</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to dashboard</a>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="QuarterWatch home"><span class="brand-icon">Q</span>QuarterWatch</a>
+    <div class="nav-caption">WORKSPACE</div>
+    <nav aria-label="Dashboard sections">
+      <a class="selected" href="#main">◉ <span>Overview</span><span class="nav-dot"></span></a>
+      <a href="#decision-feed">≡ <span>Decision feed</span></a>
+      <a href="#observations">↗ <span>Observations</span></a>
+      <a href="#exports">↓ <span>Data exports</span></a>
+    </nav>
+    <div class="side-note"><span class="eyebrow">THE DECISION WINDOW</span><strong>Q4 &nbsp; 3:26 — 3:14</strong><p>One signal per game.<br>Every observation accounted for.</p></div>
+    <div class="side-footer"><span class="pulse"></span> Local analytics workspace</div>
+  </aside>
+  <main id="main">
+    <header class="topbar"><span>WORKSPACE <span class="slash">/</span> <strong>Live operations</strong></span><span id="connection" role="status">Connecting…</span></header>
+    <section class="page-heading"><div><div class="eyebrow">OBSERVE. CAPTURE. EVALUATE.</div><h1>A clearer view of every signal.</h1><p>Live game monitoring, accountable decisions, and a complete paper trail.</p></div><a class="button" href="/export/decisions.csv">Export decisions <span>↗</span></a></section>
+    <div id="demo-banner" class="demo-banner" hidden><strong>Interactive demo</strong><span>Fictional games replay through the real decision engine. All values here are synthetic.</span><span class="demo-dot">NO API KEY REQUIRED</span></div>
+    <div id="error" class="error" role="alert" hidden></div>
+    <section class="metrics" aria-label="Trial summary">
+      <article><span class="metric-label">Games tracked</span><strong id="games">—</strong><small><span id="active-count">—</span> active in the feed</small></article>
+      <article><span class="metric-label">Paper picks</span><strong id="picks">—</strong><small><span id="pending">—</span> awaiting a final score</small></article>
+      <article><span class="metric-label">Win rate</span><strong id="win-rate">—</strong><small id="record">—</small></article>
+      <article><span class="metric-label">Net paper return</span><strong id="pnl">—</strong><small>One unit per selected Under</small></article>
+    </section>
+    <div class="overview-grid">
+      <section class="card equity-card"><div class="card-heading"><div><h2>Paper performance</h2><p>Cumulative units across settled picks</p></div><span class="chip">1 UNIT / PICK</span></div><div id="equity" class="equity" aria-label="Cumulative paper return"></div><div class="chart-caption"><span id="settled-count">— settled picks</span><span id="trial-clock">Waiting for trial</span></div></section>
+      <section class="card budget-card"><div class="card-heading"><div><h2>Request budget</h2><p>Rolling usage · shared across all games</p></div><span class="small-dot"></span></div><div class="budget-value"><strong id="calls-hour">—</strong><span>/ <span id="hourly-budget">1,600</span></span></div><div class="budget-track"><span id="budget-bar"></span></div><div class="budget-details"><div><span>Provider remaining</span><strong id="provider-remaining">—</strong></div><div><span>Provider reset</span><strong id="provider-reset">—</strong></div><div><span>Last successful update</span><strong id="last-update">—</strong></div></div></section>
+    </div>
+    <section class="card" id="decision-feed"><div class="card-heading"><div><h2>Decision feed <span class="count" id="decision-count">0</span></h2><p>The earliest usable quote in the Q4 window, with its final result.</p></div><div class="filters" role="group" aria-label="Filter decisions"><button class="active" data-filter="all" aria-pressed="true">All</button><button data-filter="picked" aria-pressed="false">Picked</button><button data-filter="skipped" aria-pressed="false">Skipped</button><button data-filter="missed" aria-pressed="false">Missed</button></div></div><div class="table-scroll"><table><thead><tr><th>GAME / CAPTURED</th><th>SIGNAL</th><th>Q4 CLOCK</th><th>SCORE</th><th>TOTAL LINE</th><th>OFFERED</th><th>ODDS</th><th>OUTCOME</th></tr></thead><tbody id="decisions"></tbody></table></div></section>
+    <div class="lower-grid">
+      <section class="card"><div class="card-heading"><div><h2>On the court</h2><p>Latest game clocks from the discovery feed</p></div><span class="chip"><span class="pulse"></span> WATCHING</span></div><div class="table-scroll"><table><thead><tr><th>GAME</th><th>PERIOD</th><th>CLOCK</th><th>SCORE</th></tr></thead><tbody id="events"></tbody></table></div></section>
+      <section class="card" id="exports"><div class="card-heading"><div><h2>Your data, ready to inspect.</h2><p>Export the underlying records to review every decision.</p></div></div><div class="export-list"><a href="/export/decisions.csv"><span>Decisions & outcomes <small>Lines, prices, signals, and final totals</small></span>↗</a><a href="/export/observations.csv"><span>Q4 observations <small>Every captured clock and quote</small></span>↗</a><a href="/export/calls.csv"><span>API request log <small>Usage, HTTP status, and timestamps</small></span>↗</a><a href="/export/events.csv"><span>Game records <small>Discovery history and final scores</small></span>↗</a></div></section>
+    </div>
+    <section class="card" id="observations"><div class="card-heading"><div><h2>Recent observations</h2><p>Repeated timestamps expose the feed's actual update cadence.</p></div><span class="chip">LATEST 60</span></div><div class="table-scroll observation-scroll"><table><thead><tr><th>RECEIVED</th><th>GAME</th><th>PERIOD</th><th>CLOCK</th><th>SCORE</th><th>TOTAL LINE</th><th>OFFERED</th></tr></thead><tbody id="observation-rows"></tbody></table></div></section>
+    <footer><span>QuarterWatch <span class="slash">/</span> Paper-trial analytics</span><span>All timestamps in your local timezone · Decimal odds</span></footer>
+  </main>
+</body>
+</html>
