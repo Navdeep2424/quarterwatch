@@ -146,11 +146,13 @@ def full_game_under(rows):
     """Select the active full-game Under from a Total market, excluding Q/half/team totals."""
     market = None
     group = ""
+    group_suspended = False
     for row in rows:
         typ = row.get("type")
         if typ == "MG":
             if str(row.get("NA") or "").strip():
                 group = str(row["NA"]).strip().lower()
+                group_suspended = str(row.get("SU", "0")) == "1"
             market = None
         elif typ == "MA":
             name = str(row.get("NA", "")).strip().lower()
@@ -163,7 +165,7 @@ def full_game_under(rows):
                     for bad in ("quarter", "half", "team", "player", "1st", "2nd", "3rd", "4th", "period")
                 )
             )
-            market = row if valid and str(row.get("SU", "0")) != "1" else None
+            market = row if valid and not group_suspended and str(row.get("SU", "0")) != "1" else None
         elif typ == "PA" and market and str(row.get("SU", "0")) != "1":
             under = (
                 str(row.get("NA", "")).strip().lower() == "under"

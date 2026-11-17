@@ -80,6 +80,14 @@ class TrialTests(unittest.TestCase):
     def test_result_joins_on_bet365_id(self):
         self.assertEqual(g.result_event_id({"id": "internal-42", "bet365_id": "fixture-42"}), "fixture-42")
 
+    def test_suspended_parent_market_is_not_used(self):
+        rows = [
+            {"type": "MG", "NA": "Game Lines", "SU": "1"},
+            {"type": "MA", "NA": "Total", "SU": "0"},
+            {"type": "PA", "HD": "U 110.5", "HA": "110.5", "OD": "5/6", "SU": "0"},
+        ]
+        self.assertEqual(g.full_game_under(rows), (None, None, None))
+
     def test_window_polling_replays_clock_jumps_and_keeps_polling_after_pick(self):
         timestamp = 10000.0
         detail_clocks = {event_id: [] for event_id in ("7", "8", "9", "10")}
